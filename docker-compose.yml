@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  #Auth Service
+  auth-service:
+    image: node:14
+    ports:
+      - "3000:8081"
+    working_dir: /usr/src/app
+    command: npm run dev
+    volumes:
+      - ./auth-service:/usr/src/app
+
+  #Client Service
+  client-service:
+    image: node:14
+    ports:
+      - "3000:8082"
+    links:
+      - mongo-database:client-database
+    working_dir: /usr/src/app
+    command: npm run dev
+    volumes:
+      - ./client-service:/usr/src/app
+
+  #Delivery Service
+  delivery-service:
+    image: node:14
+    ports:
+      - "3000:8083"
+    links:
+      - mongo-database:delivery-database
+    working_dir: /usr/src/app
+    command: npm run dev
+    volumes:
+      - ./delivery-service:/usr/src/app
+
+  mongo-database:
+    image: mongo:4
+    volumes:
+      - ./databases/mongodb:/data/db
+    ports:
+      - "27017:27017"

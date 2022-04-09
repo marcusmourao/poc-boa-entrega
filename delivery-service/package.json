@@ -1,0 +1,51 @@
+{
+  "name": "delivery-service",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/bin/www",
+    "dev": "nodemon src/bin/www",
+    "lint": "eslint --ext .js src/ ",
+    "test": "jest",
+    "release": "release-it --ci",
+    "release:preview": "release-it --ci --dry-run",
+    "ci:analyse": "./scripts/analyse.sh",
+    "ci:release": "./scripts/release.sh"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.3",
+    "helmet": "^4.1.1",
+    "mongoose": "^5.10.10",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@commitlint/format": "^11.0.0",
+    "@release-it/conventional-changelog": "^2.0.0",
+    "release-it": "^14.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^24.0.1",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^8.1.5",
+    "nodemon": "^2.0.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js}": [
+      "npm run lint",
+      "git add"
+    ]
+  },
+  "license": "MIT"
+}
