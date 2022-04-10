@@ -19,7 +19,7 @@ async function login({ username, password }) {
       password: encryptedPassword,
     });
     const jwtToken = jwt.sign(user, process.env.JWT_SECRET);
-    return { statusCode: CREATED, token: jwtToken };
+    return { statusCode: CREATED, token: jwtToken, user };
   } catch (e) {
     return buildUnauthorizedResponse(e);
   }

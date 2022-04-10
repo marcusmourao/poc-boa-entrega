@@ -5,7 +5,7 @@ services:
   auth-service:
     image: node:14
     ports:
-      - "3000:8081"
+      - "8081:3000"
     working_dir: /usr/src/app
     command: npm run dev
     volumes:
@@ -15,7 +15,7 @@ services:
   client-service:
     image: node:14
     ports:
-      - "3000:8082"
+      - "8082:3000"
     links:
       - mongo-database:client-database
     working_dir: /usr/src/app
@@ -27,13 +27,23 @@ services:
   delivery-service:
     image: node:14
     ports:
-      - "3000:8083"
+      - "8083:3000"
     links:
       - mongo-database:delivery-database
     working_dir: /usr/src/app
     command: npm run dev
     volumes:
       - ./delivery-service:/usr/src/app
+
+  #Dashboard Service
+  dashboard-service:
+    image: node:14
+    ports:
+      - "8084:3000"
+    working_dir: /usr/src/app
+    command: npm run dev
+    volumes:
+      - ./dashboard-service:/usr/src/app
 
   mongo-database:
     image: mongo:4
