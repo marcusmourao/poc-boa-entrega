@@ -7,35 +7,18 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import DashboardLayout from "./DashboardLayout";
+import LoggedLayout from "../../components/layout/LoggedLayout";
+import Copyright from "../../components/layout/Copyright";
 import LastDeliveriesTable from "./LastDeliveriesTable";
 import MonthlyRevenue from "./MonthlyRevenue";
 import DeliveriesPerMonth from "./DeliveriesPerMonth";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="#">
-        Boa Entrega
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const DashboardPage = ({
   deliveriesPerMonth,
   monthlyRevenue,
   lastDeliveries,
 }) => (
-  <DashboardLayout>
+  <LoggedLayout title="Dashboard">
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={12} md={8} lg={9}>
@@ -80,7 +63,7 @@ const DashboardPage = ({
       </Grid>
       <Copyright sx={{ pt: 4 }} />
     </Container>
-  </DashboardLayout>
+  </LoggedLayout>
 );
 
 export default DashboardPage;

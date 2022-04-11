@@ -11,12 +11,19 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
-import RenderWithRoles from "../../components/RenderWithRoles";
+
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
+import OtherHousesIcon from "@mui/icons-material/OtherHouses";
+import RenderWithRoles from "../RenderWithRoles";
 
 const drawerWidth = 240;
 
@@ -33,26 +40,61 @@ function ResponsiveDrawer(props) {
       <Toolbar />
       <Divider />
       <List>
-        {["Clientes", "Fornecedores", "Depósitos", "Mercadorias"].map(
-          (text, index) => (
-            <ListItem button key={text}>
+        {[
+          {
+            label: "Dashboard",
+            icon: DashboardIcon,
+            href: "/dashboard",
+          },
+          {
+            label: "Clientes",
+            icon: EmojiPeopleIcon,
+            href: "/clientes",
+          },
+          {
+            label: "Fornecedores",
+            icon: TransferWithinAStationIcon,
+          },
+          {
+            label: "Depósitos",
+            icon: OtherHousesIcon,
+          },
+          {
+            label: "Mercadorias",
+            icon: ShoppingBasketIcon,
+          },
+        ].map((item) => (
+          <a
+            href={item.href}
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            <ListItem button key={item.label}>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <item.icon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.label} />
             </ListItem>
-          )
-        )}
+          </a>
+        ))}
       </List>
       <Divider />
       <List>
-        {["Gestão Estratégica", "Ciência de Dados"].map((text, index) => (
-          <RenderWithRoles roles={["administrador"]}>
-            <ListItem button key={text}>
+        {[
+          {
+            label: "Gestão Estratégica",
+            icon: SupervisorAccountIcon,
+          },
+          {
+            label: "Ciência de Dados",
+            icon: BarChartIcon,
+          },
+        ].map((item) => (
+          <RenderWithRoles roles={["administrador"]} key={item.label}>
+            <ListItem button>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <item.icon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.label} />
             </ListItem>
           </RenderWithRoles>
         ))}
@@ -84,7 +126,7 @@ function ResponsiveDrawer(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Dashboard
+            {props.title}
           </Typography>
           <Button component="a" href="/logout" color="inherit">
             Logout
@@ -96,7 +138,6 @@ function ResponsiveDrawer(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"

@@ -1,12 +1,9 @@
+const { OK, CREATED, NO_CONTENT, NOT_FOUND } = require("../../core/http-status-codes");
 const {
-  OK,
-  CREATED,
-  NO_CONTENT,
-  NOT_FOUND,
-} = require('../../core/http-status-codes');
-const { buildInternalServerErrorResponse } = require('../../core/helpers/response-builders/internalServerError');
+  buildInternalServerErrorResponse,
+} = require("../../core/helpers/response-builders/internalServerError");
 
-const clientRepository = require('./clientRepository');
+const clientRepository = require("./clientRepository");
 
 async function getClients({ filters, pagination }) {
   try {
@@ -36,12 +33,12 @@ async function getClientById(id) {
   }
 }
 
-async function createClient({
-  name, email, phone,
-}) {
+async function createClient({ name, email, phone }) {
   try {
     const client = await clientRepository.createClient({
-      name, email, phone,
+      name,
+      email,
+      phone,
     });
     return { statusCode: CREATED, client };
   } catch (e) {
@@ -55,7 +52,10 @@ async function updateClientById(id, options) {
     if (!client) {
       return { statusCode: NOT_FOUND };
     }
-    const updatedClient = await clientRepository.updateClientById(id, options);
+    const updatedClient = await clientRepository.updateClientById(id, {
+      ...options,
+      deleted: false,
+    });
     return { statusCode: OK, client: updatedClient };
   } catch (e) {
     return buildInternalServerErrorResponse(e);

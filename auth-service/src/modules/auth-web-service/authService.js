@@ -18,6 +18,7 @@ async function login({ username, password }) {
       username,
       password: encryptedPassword,
     });
+    delete user.password;
     const jwtToken = jwt.sign(user, process.env.JWT_SECRET);
     return { statusCode: CREATED, token: jwtToken, user };
   } catch (e) {
