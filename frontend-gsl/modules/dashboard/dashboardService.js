@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const DASHBOARD_ENDPOINT = 'http://localhost:8084/dashboard/dashboard';
+const DASHBOARD_ENDPOINT = 'http://localhost:8084/dashboard';
 
 
 export const fetchDashboard = () => {

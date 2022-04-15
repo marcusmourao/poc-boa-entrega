@@ -5,6 +5,6 @@ const {
 
 const router = express.Router();
 
-router.get('/dashboard', getDashboard);
+router.get('/', getDashboard);
 
 module.exports = router;
