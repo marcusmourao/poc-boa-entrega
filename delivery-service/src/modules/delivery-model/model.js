@@ -10,6 +10,10 @@ const deliverySchema = mongoose.Schema({
     city: { type: String },
     state: { type: String },
     postalCode: { type: String },
+    geoLocation: {
+      lat: { type: String },
+      lon: { type: String },
+    },
   },
   destinationAddress: {
     street: { type: String },
@@ -19,6 +23,10 @@ const deliverySchema = mongoose.Schema({
     city: { type: String },
     state: { type: String },
     postalCode: { type: String },
+    geoLocation: {
+      lat: { type: String },
+      lon: { type: String },
+    },
   },
   status: { type: String },
   routeSteps: { type: Array },

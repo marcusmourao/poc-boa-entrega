@@ -1,5 +1,4 @@
 import {
-  Chip,
   IconButton,
   Table,
   TableBody,
@@ -11,24 +10,10 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import RenderWithRoles from "../../components/RenderWithRoles";
+import DeliveryStatus from "../../components/delivery/DeliveryStatus";
 
-const getLabelByStatus = (status) =>
-  ({
-    finished: "Finalizado",
-    pending: "Pendente",
-    "out-of-date": "Atrasado",
-  }[status]);
-
-const getColorByStatus = (status) =>
-  ({
-    finished: "success",
-    pending: "warning",
-    "out-of-date": "error",
-  }[status]);
-
-const DeliveryStatus = ({ status }) => (
-  <Chip label={getLabelByStatus(status)} color={getColorByStatus(status)} />
-);
+const handleVisibilityIconOnClick = (id) =>
+  (window.location.href = `/entregas/${id}`);
 
 const LastDeliveriesTable = ({ deliveries }) => (
   <Table>
@@ -55,7 +40,9 @@ const LastDeliveriesTable = ({ deliveries }) => (
             <DeliveryStatus status={delivery.status} />
           </TableCell>
           <TableCell>
-            <IconButton>
+            <IconButton
+              onClick={() => handleVisibilityIconOnClick(delivery.id)}
+            >
               <VisibilityIcon />
             </IconButton>
             <RenderWithRoles roles={["suporte", "administrador"]}>
