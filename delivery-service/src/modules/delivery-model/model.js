@@ -30,6 +30,7 @@ const deliverySchema = mongoose.Schema({
   },
   status: { type: String },
   routeSteps: { type: Array },
+  items: { type: Array },
 }, {
   id: true,
   timestamps: true,
